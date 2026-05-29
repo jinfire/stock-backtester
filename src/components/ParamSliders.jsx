@@ -24,9 +24,9 @@ export default function ParamSliders({ params, onChange, color }) {
   return (
     <div style={{ background: "#0a0f1a", border: "1px solid #1a1f2e", borderRadius: 8, padding: 16 }}>
       <Slider label="하락 트리거" value={params.sellDrop} min={1} max={30} unit="%" onChange={v => onChange({ ...params, sellDrop: v })} color={color} />
-      <Slider label="분할매도 횟수" value={params.sellTimes} min={1} max={10} unit="회" onChange={v => onChange({ ...params, sellTimes: v })} color={color} />
+      <Slider label="분할매도 비율" value={Math.round(100 / params.sellTimes)} min={10} max={100} unit="%" onChange={v => onChange({ ...params, sellTimes: Math.round(100 / v) })} color={color} />
       <Slider label="반등 트리거" value={params.buyRise} min={1} max={30} unit="%" onChange={v => onChange({ ...params, buyRise: v })} color={color} />
-      <Slider label="분할매수 횟수" value={params.buyTimes} min={1} max={10} unit="회" onChange={v => onChange({ ...params, buyTimes: v })} color={color} />
+      <Slider label="분할매수 비율" value={Math.round(100 / params.buyTimes)} min={10} max={100} unit="%" onChange={v => onChange({ ...params, buyTimes: Math.round(100 / v) })} color={color} />
       <Slider label="양도세율" value={params.taxRate} min={0} max={50} unit="%" onChange={v => onChange({ ...params, taxRate: v })} color={color} />
     </div>
   );
