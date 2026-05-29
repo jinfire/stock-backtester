@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://jensoo7023.github.io/stock-backtester",
+  "homepage": "https://jinfire.github.io/stock-backtester",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
