@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { runStrategyFast } from "../utils/backtester";
 
 export default function Top5Panel({ prices, onApply, color }) {
   const [results, setResults] = useState([]);
   const [running, setRunning] = useState(false);
   const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    setResults([]);
+    setSearched(false);
+  }, [prices]);
 
   function run() {
     setRunning(true);
@@ -59,9 +64,9 @@ export default function Top5Panel({ prices, onApply, color }) {
           <thead>
             <tr style={{ color: "#475569" }}>
               <th style={{ textAlign: "left", padding: "4px 8px" }}>하락%</th>
-              <th style={{ textAlign: "left", padding: "4px 8px" }}>매도횟수</th>
+              <th style={{ textAlign: "left", padding: "4px 8px" }}>매도비율</th>
               <th style={{ textAlign: "left", padding: "4px 8px" }}>반등%</th>
-              <th style={{ textAlign: "left", padding: "4px 8px" }}>매수횟수</th>
+              <th style={{ textAlign: "left", padding: "4px 8px" }}>매수비율</th>
               <th style={{ textAlign: "right", padding: "4px 8px" }}>전략</th>
               <th style={{ textAlign: "right", padding: "4px 8px" }}>존버</th>
             </tr>
@@ -76,9 +81,9 @@ export default function Top5Panel({ prices, onApply, color }) {
                 onMouseLeave={e => e.currentTarget.style.background = "transparent"}
               >
                 <td style={{ padding: "5px 8px", color: "#e2e8f0" }}>{r.sd}%</td>
-                <td style={{ padding: "5px 8px", color: "#e2e8f0" }}>{r.st}회</td>
+                <td style={{ padding: "5px 8px", color: "#e2e8f0" }}>{Math.round(100/r.st)}%</td>
                 <td style={{ padding: "5px 8px", color: "#e2e8f0" }}>{r.br}%</td>
-                <td style={{ padding: "5px 8px", color: "#e2e8f0" }}>{r.bt}회</td>
+                <td style={{ padding: "5px 8px", color: "#e2e8f0" }}>{Math.round(100/r.bt)}%</td>
                 <td style={{ padding: "5px 8px", color: "#4ade80", textAlign: "right" }}>${r.stratFinal}</td>
                 <td style={{ padding: "5px 8px", color: "#94a3b8", textAlign: "right" }}>${r.holdFinal}</td>
               </tr>
