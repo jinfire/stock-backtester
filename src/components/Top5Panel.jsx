@@ -4,6 +4,7 @@ import { runStrategyFast } from "../utils/backtester";
 export default function Top5Panel({ prices, onApply, color }) {
   const [results, setResults] = useState([]);
   const [running, setRunning] = useState(false);
+  const [searched, setSearched] = useState(false);
 
   function run() {
     setRunning(true);
@@ -26,6 +27,7 @@ export default function Top5Panel({ prices, onApply, color }) {
 
       found.sort((a, b) => b.stratFinal - a.stratFinal);
       setResults(found.slice(0, 5));
+      setSearched(true);
       setRunning(false);
     }, 10);
   }
@@ -85,7 +87,12 @@ export default function Top5Panel({ prices, onApply, color }) {
         </table>
       )}
 
-      {results.length === 0 && !running && (
+      {results.length === 0 && !running && searched && (
+        <div style={{ color: "#f87171", fontSize: 12, fontFamily: "monospace" }}>
+          이기는 구간이 없음 — 이 종목/기간은 존버가 항상 우세합니다
+        </div>
+      )}
+      {results.length === 0 && !running && !searched && (
         <div style={{ color: "#334155", fontSize: 11, fontFamily: "monospace" }}>
           탐색 결과가 여기에 표시됩니다
         </div>
