@@ -12,10 +12,10 @@ export default function Top5Panel({ prices, onApply, color }) {
       const found = [];
       const priceArr = prices.map(d => d.price);
 
-      for (let sd = 1; sd <= 30; sd += 3) {
-        for (let st = 1; st <= 10; st += 2) {
-          for (let br = 1; br <= 30; br += 3) {
-            for (let bt = 1; bt <= 10; bt += 2) {
+      for (let sd = 1; sd <= 30; sd++) {
+        for (let st = 1; st <= 10; st++) {
+          for (let br = 1; br <= 30; br++) {
+            for (let bt = 1; bt <= 10; bt++) {
               const { stratFinal, holdFinal } = runStrategyFast(priceArr, sd, st, br, bt, 22);
               if (stratFinal > holdFinal) {
                 found.push({ sd, st, br, bt, stratFinal, holdFinal });
